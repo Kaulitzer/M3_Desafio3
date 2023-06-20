@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cambio de Color</title>
+<style>
+    .div1 {
+        background-color: red;
+    }
+    
+    .div2 {
+    background-color: blue;
+    }
+    
+    .div3 {
+    background-color: green;
+    }
+    
+    .div4 {
+    background-color: yellow;
+    }
+    
+    #currentKey,
+    #currentColor {
+    font-size: 24px;
+    font-weight: bold;
+    }
+    
+    #guide {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    </style>
+    </head>
+    <body>
+    <div id="div1" style="width: 200px; height: 200px;" class="div1"></div>
+    <div id="div2" style="width: 200px; height: 200px;" class="div2"></div>
+    <div id="div3" style="width: 200px; height: 200px;" class="div3"></div>
+    <div id="div4" style="width: 200px; height: 200px;" class="div4"></div>
+    
+    <div id="currentKey">Tecla actual: </div>
+    <div id="currentColor">Color actual: </div>
+    <div id="guide">Presiona las teclas A, S o D para cambiar el color</div>
+    
+    <script>
+        const divs = document.querySelectorAll("div[id^='div']");
+        const currentKeyElement = document.getElementById("currentKey");
+        const currentColorElement = document.getElementById("currentColor");
+    
+        function updateColor(color, key) {
+        currentKeyElement.textContent = "Tecla actual: " + key;
+        let colorDescription;
+    
+        if (color === "purple") {
+            colorDescription = "Morado";
+        } else if (color === "orange") {
+            colorDescription = "Naranja";
+        } else if (color === "pink") {
+            colorDescription = "Rosa";
+        }
+    
+        currentColorElement.textContent = "Color actual: " + colorDescription;
+    
+        divs.forEach(function(div) {
+            div.addEventListener('click', function(event) {
+            event.stopPropagation();
+            this.style.backgroundColor = color;
+            });
+        });
+        }
+
+
+        document.addEventListener('keydown', function(event) {
+        const key = event.key.toLowerCase();
+    
+        if (key === 'a') {
+            updateColor("purple", "A");
+        } else if (key === 's') {
+            updateColor("orange", "S");
+        } else if (key === 'd') {
+            updateColor("pink", "D");
+        } else {
+            alert("Utiliza una tecla válida");
+        }
+        });
+    </script>
+    </body>
+
+    </html>
